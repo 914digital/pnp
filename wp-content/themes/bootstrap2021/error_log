@@ -1,0 +1,4 @@
+[17-Mar-2017 11:12:14 UTC] PHP Fatal error:  Call to undefined function get_template_part() in /home/pestcontrol02/public_html/wp-content/themes/glen/404.php on line 1
+[23-Mar-2017 18:37:51 UTC] PHP Fatal error:  Call to undefined function get_template_part() in /home/pestcontrol02/public_html/wp-content/themes/glen/404.php on line 1
+[26-Mar-2017 12:14:32 UTC] PHP Fatal error:  Call to undefined function get_template_part() in /home/pestcontrol02/public_html/wp-content/themes/glen/404.php on line 1
+[28-Mar-2017 09:28:45 UTC] PHP Fatal error:  Call to undefined function get_template_part() in /home/pestcontrol02/public_html/wp-content/themes/glen/404.php on line 1
