@@ -17,15 +17,16 @@
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-local" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <form>
+                            <form method="post">
+                                <input type="hidden" name="pt_wc_rb_search_local" value="1">
                                 <div class="form-row align-items-center">
                                     <div class="form-group col-md-3">
                                         <label class="sr-only" for="localArea">Area Code</label>
-                                        <input type="text" class="form-control" id="localArea" placeholder="Area Code">
+                                        <input type="text" name="pt_wc_rb_area" class="form-control" id="localArea" placeholder="Area Code">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="sr-only" for="localWord"></label>
-                                        <input type="text" class="form-control" id="localWord" placeholder="keyword/number">
+                                        <input type="text" class="form-control" id="localWord" placeholder="keyword/number" name="pt_wc_rb_vanity" data-swplive="true" /> <!-- data-swplive="true" enables SearchWP Live Search -->
                                     </div>
                                     <div class="form-group col-md-3">
                                         <button type="submit" class="btn btn-primary w-100">Search</button>
