@@ -124,14 +124,15 @@
                 </form>
                 </div>
                 <div class="tab-pane fade" id="nav-toll-free" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <form>
+                <form method="post">
+                    <input type="hidden" name="pt_wc_rt_search_tollfree" value="1">
                     <div class="form-row align-items-center">
                         <div class="form-group col-md-3">
                            <span class="tollfree">1-8XX</span>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="sr-only" for="localWord"></label>
-                            <input type="text" class="form-control" id="tollFreeNumber" placeholder="keyword/number">
+                            <input type="text" name="pt_wc_rt_vanity" class="form-control" id="tollFreeNumber" placeholder="keyword/number">
                         </div>
                         <div class="form-group col-md-3">
                             <button type="submit" class="btn btn-primary w-100">Search</button>

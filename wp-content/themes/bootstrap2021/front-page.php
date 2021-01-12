@@ -1,5 +1,20 @@
 <?php get_template_part('parts/header'); ?>
 <?php $backgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' );?>
+<?php
+
+    if ( isset( $_POST['pt_wc_rt_search_tollfree'] ) ) {
+        $local_aria    = 'true';
+        $local_pane    = '';
+        $tollfree_aria = 'false';
+        $tollfree_pane = 'show active';
+    } else {
+        $local_aria    = 'false';
+        $local_pane    = 'show active';
+        $tollfree_aria = 'true';
+        $tollfree_pane = '';
+    }
+
+?>
 <div class="main-banner"  style="background-image: url('<?php echo $backgroundImg[0]; ?>') ">
     <div class="container">
         <div class="row">
@@ -11,12 +26,12 @@
                             <div class="col-md-8 offset-md-2">
                             <nav>
                             <div class="nav nav-tabs justify-content-center mb-3" id="nav-tab" role="tablist">
-                                <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-local" role="tab" aria-controls="nav-local" aria-selected="true">Local</a>
-                                <a class="nav-link" id="nav-toll-free-tab" data-toggle="tab" href="#nav-toll-free" role="tab" aria-controls="nav-profile" aria-selected="false">Toll Free</a>
+                                <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-local" role="tab" aria-controls="nav-local" aria-selected="<?php echo $local_aria;?>">Local</a>
+                                <a class="nav-link" id="nav-toll-free-tab" data-toggle="tab" href="#nav-toll-free" role="tab" aria-controls="nav-profile" aria-selected="<?php echo $tollfree_aria;?>">Toll Free</a>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-local" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <div class="tab-pane fade <?php echo $local_pane; ?>" id="nav-local" role="tabpanel" aria-labelledby="nav-home-tab">
                             <form method="post">
                                 <input type="hidden" name="pt_wc_rb_search_local" value="1">
                                 <div class="form-row align-items-center">
@@ -34,15 +49,16 @@
                                 </div>
                             </form>
                             </div>
-                            <div class="tab-pane fade" id="nav-toll-free" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <form>
+                            <div class="tab-pane fade <?php echo $tollfree_pane; ?>" id="nav-toll-free" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <form method="post">
+                                <input type="hidden" name="pt_wc_rt_search_tollfree" value="1">
                                 <div class="form-row align-items-center">
                                     <div class="form-group col-md-3">
                                        <span class="tollfree">1-8XX</span>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="sr-only" for="localWord"></label>
-                                        <input type="text" class="form-control" id="tollFreeNumber" placeholder="keyword/number">
+                                        <label class="sr-only" for="tollFreeNumber"></label>
+                                        <input type="text" name="pt_wc_rt_vanity" class="form-control" id="tollFreeNumber" placeholder="keyword/number">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <button type="submit" class="btn btn-primary w-100">Search</button>
