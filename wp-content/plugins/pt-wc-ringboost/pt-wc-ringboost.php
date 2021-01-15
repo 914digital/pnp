@@ -223,6 +223,8 @@ function pt_wc_rb_add_phone_to_cart() {
 			$product->set_sku( $phone_number );
 			$product->set_stock_status( 'instock' );
 			$product->set_stock_quantity( 1 );
+			$product->set_manage_stock( 'yes' );
+			$product->set_image_id( 76 ); // fixed image id
 
 			$product->save();
 
