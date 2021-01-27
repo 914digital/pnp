@@ -27,14 +27,25 @@
 
                 <?php  //echo 'Result: <pre>'. print_r( $result,1  ) . '</pre>'; ?>
 
-                <?php if ( ! $result || ! $result->items ) { ?>
+                <?php if ( ! $result || ! $result->items ) { 
 
-                    <p><?php esc_html_e( 'Sorry, an error occurred while searching phone numbers. Please try again.' ); ?></p>
+                    $message = esc_html_e( 'Sorry, an error occurred while searching phone numbers. Please check the API results.' );
+                    $message .= print_r( $result, 1);
+
+                    $admin_email = array( get_option('admin_email') );
+                    $subject     = esc_html_( 'API error reporting for ' . site_url() );
+                    wp_mail( $admin_email, $subject, $message );
+
+
+
+                    ?>
+
+                    <p><?php esc_html_e( 'There are no matching numbers from your query. Please try again.' ); ?></p>
 
 
                 <?php } elseif ( 0 == count( $result->items ) ) { ?>
 
-                    <p><?php esc_html_e( 'Sorry, no phone numbers matched your criteria. Please try again.' ); ?></p>
+                    <p><?php esc_html_e( 'There are no matching numbers from your query. Please try again.' ); ?></p>
 
                 <?php } else { ?>
 
