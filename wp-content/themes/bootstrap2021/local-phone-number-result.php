@@ -89,8 +89,26 @@
                                 <td><?php echo $item->area_code; ?></td>
                                 <td><?php echo $item->city; ?></td>
                                 <td><?php echo $item->state; ?></td>
-                                <td><?php echo wc_price( $item->price ); ?></td>
-                                <td>`<?php print_r( $item->price ); ?>`<a href="?pt_wc_rb_phone=<?php echo $item->phone;?>" class="button"><?php esc_html_e( 'Buy' ); ?></a></td>
+                                    <?php 
+                                    
+                                        if ( 0 == $item->price ) {
+
+                                            ?>
+
+                                                <td colspan="2"><a href="/contact" class="button"><?php esc_html_e( 'Please contact us' ); ?></a></td>
+
+                                            <?php 
+
+                                        } else {
+
+                                            ?>
+                                                <td><?php echo wc_price( $item->price ); ?></td>
+                                                <td><a href="?pt_wc_rb_phone=<?php echo $item->phone;?>" class="button"><?php esc_html_e( 'Buy' ); ?></a></td>
+
+                                            <?php
+
+                                        }
+                                    ?>
                             </tr>
 
                             <?php
