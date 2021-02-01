@@ -54,6 +54,12 @@ h1, h2, h3 {
 	top:-1px;
 }
 
+.top-search {
+	color:#fff;
+	margin-right: 25px;
+	cursor: pointer;
+}
+
 nav.navbar {
 	background-color:#2e3f6e;
 	padding:15px 0;
@@ -132,8 +138,6 @@ nav.navbar a {
 .menu-right .nav-link::after {
 	transform: scaleX(0);
 }
-
-
 
 .menu-right .nav-link.si-btn {
 	padding:5px 10px;
@@ -364,7 +368,7 @@ nav.navbar a {
 /* --- Page --- */
 
 .page-banner {
-	padding-top: 400px;
+	padding-top: 320px;
     clip-path: polygon(0 0, 100% 0%, 100% 48%, 0 76%);
     background-color: #5369a7;
 	color: #fff;
@@ -373,7 +377,12 @@ nav.navbar a {
 
 .page-banner h1 {
 	position: absolute;
-	top: -258px;
+	top: -195px;
+}
+
+.page-content h2 {
+	color:#2e3f6e;
+	margin-bottom:30px;
 }
 
 

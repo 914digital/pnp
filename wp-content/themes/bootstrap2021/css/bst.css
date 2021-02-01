@@ -1,19 +1,19 @@
 .dt {
-  display:block;
+  display:block!important;
 }
 
 .mb {
-  display:none;
+  display:none!important;
 }
 
 
 @media(max-width:768px) {
   .dt {
-    display:none;
+    display:none!important;
   }
 
   .mb {
-    display:block;
+    display:block!important;
   }
 }
 

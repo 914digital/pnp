@@ -78,7 +78,7 @@
     <div class="mask"></div>
 </div>
 
-<section class="home-cards">
+<section class="home-cards dt">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -168,7 +168,7 @@
     </div>
 </section>
 
-<section class="industries">
+<section class="industries dt">
     <div class="container">
         <div class="row">
             <div class="col-md-6 ind-icons" data-aos="fade-right" data-aos-duration="1000">
@@ -200,6 +200,42 @@
                 <a href="/industries" class="btn btn-primary">Learn More</a>
             </div>
         </div>
+        
+    </div>
+</section>
+
+<section class="industries mb">
+    <div class="container">
+        <div class="row">
+        <div class="col-md-6 mb-5" data-aos="fade-left" data-aos-duration="1000">
+                <h4>We Specialize In Multiple <span>Industries</span></h4>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed explicabo, provident dolorum odio quidem officia incidunt pariatur quae alias debitis.</p>
+                <a href="/industries" class="btn btn-primary">Learn More</a>
+            </div>
+            <div class="col-md-6 ind-icons" data-aos="fade-right" data-aos-duration="1000">
+                <div class="row">
+                    <div class="col-md-6 col-6 mb-5">
+                        <i class="fal fa-wrench"></i>
+                        <h5>Home Services</h5>
+                    </div>
+                    <div class="col-md-6 col-6 mb-5">
+                        <i class="fal fa-hotel"></i>
+                        <h5>Real Estate</h5>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-6">
+                            <i class="fal fa-stethoscope"></i>
+                            <h5>Health & Wellness</h5>
+                        </div>
+                        <div class="col-md-6 col-6">
+                            <i class="fal fa-books"></i>
+                            <h5>Law Services</h5>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        
     </div>
 </section>
 	

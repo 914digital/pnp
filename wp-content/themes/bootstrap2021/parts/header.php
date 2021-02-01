@@ -37,8 +37,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+<<<<<<< HEAD
+                <div class="search-overlay">
+=======
                 <div class="main-banner-text">
                     <h1 data-aos="fade-in" data-aos-duration="1000"><?php the_field('main_banner_text'); ?></h1>
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
                     <div class="mb-search mt-5" data-aos="fade-in" data-aos-duration="1000">
                         <div class="row">
                             <div class="col-md-8 offset-md-2">
@@ -125,12 +129,11 @@
        
           </div>
       </div>
-      <div class="menu-right">
+      <div class="menu-right dt">
         <ul class="nav navbar-nav">
-          <li><a class="nav-link" href=""><i class="fas fa-phone-alt mr-2"></i> 888.888.8888</a></li>
-          <li onclick="openNav();"><i class="fas fa-search"></i></li>
-          <li><a class="nav-link" href=""><i class="fas fa-shopping-cart"></i></a></li>
-          <li><a class="nav-link btn btn-primary si-btn" href="/contact-us"><i class="fal fa-envelope"></i> Contact Us</a></li>
+          <li><a class="nav-link" href="tel:8333533353"><i class="fas fa-phone-alt mr-2"></i> 833.353.3353</a></li>
+          <li class="top-search" onclick="openNav();"><i class="fas fa-search"></i></li>
+          <li><a class="nav-link btn btn-primary si-btn" href="/contact"><i class="fal fa-envelope"></i> Contact Us</a></li>
         </ul>
       </div>
   </nav>

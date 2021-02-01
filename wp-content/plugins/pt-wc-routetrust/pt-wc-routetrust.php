@@ -7,10 +7,17 @@
  * Author: Gabriel Reguly
  * Author URI: 
  * Requires at least: 5.5
+<<<<<<< HEAD
+ * Tested up to: 5.5.1
+ *
+ * WC requires at least: 4.0
+ * WC tested up to: 4.7.1
+=======
  * Tested up to: 5.6
  *
  * WC requires at least: 4.0
  * WC tested up to: 4.8.0
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
  *
  */
 
@@ -19,16 +26,29 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 add_action( 'init', 'pt_wc_rt_process_post' );
 function pt_wc_rt_process_post() {
 
+<<<<<<< HEAD
+	if ( isset( $_POST['pt_wc_rt_search_tollfree'] ) ) {
+
+		//wp_die('search tollfree' );
+
+		
+		$phone_number = '8335721800';
+=======
 	if ( isset( $_POST['pt_wc_rt_search_local'] ) ) {
 
 		$phone_number = '7738406969';
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 		//echo 'pt_wc_rt_get_number_details( ' . $phone_number .' )<pre>' . print_r( pt_wc_rt_get_number_details( $phone_number, true ), 1 ) . '</pre>';
 		//echo 'pt_wc_rt_reserve_number( ' . $phone_number .' )<pre>' . print_r( pt_wc_rt_reserve_number( $phone_number ), 1 ) . '</pre>';
 		//echo 'pt_wc_rt_release_number( ' . $phone_number .' )<pre>' . print_r( pt_wc_rt_release_number( $phone_number, true ), 1 ) . '</pre>';
 		//echo 'pt_wc_rt_order_number( ' . $phone_number .' )<pre>' . print_r( pt_wc_rt_order_number( $phone_number ), 1 ) . '</pre>';
 
+<<<<<<< HEAD
+		get_template_part( 'toolfree-phone-number-result' );
+=======
 		get_template_part( 'local-phone-number-result' );
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 		exit;
 
 	}
@@ -47,7 +67,11 @@ function pt_wc_rt_process_get() {
 
 function pt_wc_rt_order_number( $number ) {
 
+<<<<<<< HEAD
+	$url   = esc_url_raw( pt_wc_rt_get_routetrust_url() . '/api/rt800/numbers/' . $number . '/order');
+=======
 	$url   = esc_url_raw( pt_wc_rt_get_ringboost_url() . '/local/' . $number . '/order');
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 	$args  = array(
 
@@ -65,7 +89,11 @@ function pt_wc_rt_order_number( $number ) {
 
 	if ( '200' != wp_remote_retrieve_response_code( $response ) ) {
 
+<<<<<<< HEAD
+		/*$message = esc_html__( 'Error ordering number details: ', 'pt-wc-routetrust' ) .  ' 
+=======
 		/*$message = esc_html__( 'Error ordering number details: ', 'pt-wc-ringboost' ) .  ' 
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 								<pre> ' . print_r( $response, 1 ) . '</pre>
 								<pre> ' . print_r( $args, 1 ) . '</pre>';
 		wp_die( $message );/**/
@@ -99,10 +127,17 @@ function pt_wc_rt_maybe_order_phone_numbers( $order_id ) {
 
 			$product = $order_item->get_product();
 
+<<<<<<< HEAD
+			if ( 'yes' == get_post_meta( $product->get_id(), 'is_routetrust', true ) ) {
+
+				// process only 1 time
+				if ( 'yes' != get_post_meta( $product->get_id(), 'is_routetrust_ordered', true ) ) {
+=======
 			if ( 'yes' == get_post_meta( $product->get_id(), 'is_ringboost', true ) ) {
 
 				// process only 1 time
 				if ( 'yes' != get_post_meta( $product->get_id(), 'is_ringboost_ordered', true ) ) {
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 					$phone_number = $product->get_sku();
 
@@ -110,7 +145,11 @@ function pt_wc_rt_maybe_order_phone_numbers( $order_id ) {
 
 					pt_wc_rt_order_number( $phone_number );
 
+<<<<<<< HEAD
+					update_post_meta( $product->get_id(), 'is_routetrust_ordered', 'yes' );
+=======
 					update_post_meta( $product->get_id(), 'is_ringboost_ordered', 'yes' );
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 				}
 			}
@@ -123,7 +162,11 @@ function pt_wc_rt_remove_phone_from_cart( $cart_item_key, $cart ) {
 
 	$product = wc_get_product( $cart->cart_contents[ $cart_item_key ][ 'product_id' ] );
 
+<<<<<<< HEAD
+	if ( 'yes' != get_post_meta( $product->get_id(), 'is_routetrust', true ) ) {
+=======
 	if ( 'yes' != get_post_meta( $product->get_id(), 'is_ringboost', true ) ) {
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 		return;
 
@@ -131,12 +174,18 @@ function pt_wc_rt_remove_phone_from_cart( $cart_item_key, $cart ) {
 
 	$phone_number = $product->get_sku();
 
+<<<<<<< HEAD
+	$released = pt_wc_rt_release_number( $phone_number );
+
+	if ( ! $released ) {
+=======
 	$release = pt_wc_rt_release_number( $phone_number );
 
 	if ( 'Number released' == $release->result ) {
 
 
 	} else {
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 		wc_add_notice( sprintf( esc_html__( 'Error while releasing %s, please try again.'), $phone_number ), 'error' );
 
@@ -148,13 +197,22 @@ function pt_wc_rt_restore_phone_to_cart( $cart_item_key, $cart ) {
 
 	$product = wc_get_product( $cart->cart_contents[ $cart_item_key ][ 'product_id' ] );
 
+<<<<<<< HEAD
+	if ( 'yes' != get_post_meta( $product->get_id(), 'is_routetrust', true ) ) {
+=======
 	if ( 'yes' != get_post_meta( $product->get_id(), 'is_ringboost', true ) ) {
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 		return;
 
 	}
 
 	$phone_number = $product->get_sku();
+<<<<<<< HEAD
+	$reserved     = pt_wc_rt_reserve_number( $phone_number );
+
+	if ( ! $reserved ) {
+=======
 	$reserve = pt_wc_rt_reserve_number( $phone_number );
 
 
@@ -162,6 +220,7 @@ function pt_wc_rt_restore_phone_to_cart( $cart_item_key, $cart ) {
 
 
 	} else {
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 		wc_add_notice( sprintf( esc_html__( 'Error while reserving %s, please try again.'), $phone_number ), 'error' );
 
@@ -178,6 +237,51 @@ function pt_wc_rt_add_phone_to_cart() {
 
 		wc_add_notice( sprintf( esc_html__( 'Error while getting price for %s, please try again.'), $phone_number ), 'error' );
 
+<<<<<<< HEAD
+		wp_die( wc_print_notices( true )) ;
+
+	} else {
+
+		if ( 'R' == $details->fnStatusId ) {
+
+			wc_add_notice( sprintf( esc_html__( 'Number %s is already reserved, please try other number.'), $phone_number ), 'error' );
+			return;
+
+		}
+
+
+		//wp_die( 'details <pre>' . print_r( $details, 1 ) . '</pre>') ;
+
+		/*
+
+			stdClass Object
+			(
+			    [respOrgId] => RZA09
+			    [statusTs] => 2021-01-15T13:00:00.000Z
+			    [effectiveTs] => 2021-01-15T13:00:00.000Z
+			    [lastUpdateTs] => 2021-01-15T13:02:09.000Z
+			    [lastAssignTs] => 
+			    [lastDisconnectTs] => 
+			    [lastPendingTs] => 
+			    [lastReserveTs] => 2021-01-15T13:02:09.000Z
+			    [lastSpareTs] => 2017-04-22T11:00:00.000Z
+			    [lastTransitionalTs] => 
+			    [lastUnavailableTs] => 
+			    [lastWorkingTs] => 
+			    [lastWorkingRespOrgId] => 
+			    [lastWorkingDays] => 
+			    [totalWorkingDays] => 
+			    [availableTs] => 
+			    [templateName] => 
+			    [interLataCarriers] => 
+			    [intraLataCarriers] => 
+			    [tfn] => 8335721800
+			    [tfnStatusId] => W (Working)
+			    [tfnStatusId] => R (Reserved)
+			    [tfnStatusId] => S (Spared)     // Released
+			    
+			)
+=======
 	} else {
 
 		/*
@@ -197,6 +301,7 @@ function pt_wc_rt_add_phone_to_cart() {
 			    [price] => 549
 			)
 
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 		*/
 
 		$product_id = wc_get_product_id_by_sku( $phone_number );
@@ -221,6 +326,28 @@ function pt_wc_rt_add_phone_to_cart() {
 			$product->set_regular_price( $details->price / 100 );
 			$product->set_virtual( 'yes' );
 			$product->set_sku( $phone_number );
+<<<<<<< HEAD
+			$product->set_manage_stock( 'yes' );
+			$product->set_stock_status( 'instock' );
+			$product->set_stock_quantity( 1 );
+			$product->set_image_id( 76 ); // fixed image id
+
+			$product->save();
+
+			update_post_meta( $product_id, 'is_routetrust', 'yes' );
+
+		}
+
+		$reserved = pt_wc_rt_reserve_number( $phone_number );
+
+		if ( ! $reserved ) {
+
+			wc_add_notice( sprintf( esc_html__( 'Error while reserving %s, please try again.'), $phone_number ), 'error' );
+
+		} else {
+
+			// add number to cart and redirect to checkout page
+=======
 			$product->set_stock_status( 'instock' );
 			$product->set_stock_quantity( 1 );
 
@@ -234,10 +361,15 @@ function pt_wc_rt_add_phone_to_cart() {
 
 		if ( 'Number reserved' == $reserve->result ) {
 
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 			$add_to_cart = add_query_arg( 'add-to-cart', $product_id , wc_get_checkout_url() );
 			wp_safe_redirect( $add_to_cart );
 			exit;
 
+<<<<<<< HEAD
+		}
+
+=======
 		} else {
 
 			wc_add_notice( sprintf( esc_html__( 'Error while reserving %s, please try again.'), $phone_number ), 'error' );
@@ -258,13 +390,21 @@ function pt_wc_rt_add_phone_to_cart() {
 			exit;
 
 		}*/
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 	}
 }
 
 
+<<<<<<< HEAD
+function pt_wc_rt_get_routetrust_url() {
+
+	//$url = 'https://tollfree.portal.routetrust.com';
+	$url = 'https://rtx.portal.routetrust.com';
+=======
 function pt_wc_rt_get_ringboost_url() {
 
 	$url = 'https://partner.ringboost-stage.bigdropinc.net';
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 	return $url;
 }
@@ -272,6 +412,51 @@ function pt_wc_rt_get_ringboost_url() {
 
 function pt_wc_rt_get_token() {
 
+<<<<<<< HEAD
+	$url  = esc_url_raw( pt_wc_rt_get_routetrust_url() . '/api/authorization/login' );
+	$args = array( 
+					'body' => array( 
+								'email'    => 'gabriel@ppgr.com.br', 
+								'password' => '94Q337EJ',
+								),
+			);
+
+	$response = wp_remote_post( $url, $args );
+
+	if ( '201' != wp_remote_retrieve_response_code( $response ) ) {
+
+		$message = esc_html__( 'Error creating auth token: ', 'pt-wc-routetrust' ) .  ' 
+								Response <pre> ' . print_r( $response, 1 ) . '</pre><br />
+								URL<pre> ' . print_r( $url, 1 ) . '</pre>';
+
+		wp_die( $message );
+
+
+	} else {
+
+		$response_body = wp_remote_retrieve_body( $response );
+		$json = json_decode( $response_body );
+
+		//wp_die( $json->rtxJwt );
+
+		return $json->rtxJwt;
+
+	}	
+}
+
+
+function pt_wc_rt_search_number() {
+
+	$body = array( 'pageSize' => 20 );
+
+	if ( isset( $_POST['pt_wc_rt_vanity'] ) && sanitize_text_field( $_POST['pt_wc_rt_vanity'] ) ) {
+
+		$body['search'] = sanitize_text_field( $_POST['pt_wc_rt_vanity'] );
+
+	}
+
+	$url   = esc_url_raw( pt_wc_rt_get_routetrust_url() . '/api/rt800/numbers' );
+=======
 	$token = 'Bq9SRfARwgmegYpOHcBSegD0RFrQ8PeYemMp15TDNXOJFoOmXQFjf18mweXVkoL8';
 
 	return $token;
@@ -301,6 +486,7 @@ function pt_wc_rt_search_number() {
 	}
 
 	$url   = esc_url_raw( pt_wc_rt_get_ringboost_url() . '/local?call_for_price=false&per_page=10' . $vanity . $area_code );
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 	$args  = array(
 
@@ -311,6 +497,21 @@ function pt_wc_rt_search_number() {
 			'headers'     => array(
 								'Authorization' => 'Bearer ' . pt_wc_rt_get_token(),
 							),
+<<<<<<< HEAD
+			'body'        => $body,
+
+		);
+
+	$response = wp_remote_post( $url, $args );
+
+	if ( '201' != wp_remote_retrieve_response_code( $response ) ) {
+
+		$message = esc_html__( 'Error searching number: ', 'pt-wc-routetrust' ) .  ' 
+								<pre> ' . print_r( $response, 1 ) . '</pre>
+								<pre> ' . print_r( $args, 1 ) . '</pre>';
+
+		wp_die( $message );
+=======
 
 		);
 
@@ -322,6 +523,7 @@ function pt_wc_rt_search_number() {
 								<pre> ' . print_r( $response, 1 ) . '</pre>
 								<pre> ' . print_r( $args, 1 ) . '</pre>';
 
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 		return false;
 
 	} else {
@@ -333,18 +535,32 @@ function pt_wc_rt_search_number() {
 
 		/**
 		$json_pretty = json_encode( $json, JSON_PRETTY_PRINT );
+<<<<<<< HEAD
+		$message     = 'Response <pre>' . print_r( $json_pretty, 1 ) . '	</pre>';
+		$message    .= 'URL <pre> ' . print_r( $url, 1 ) . '</pre>';
+		$message    .= 'ARGS <pre> ' . print_r( $args, 1 ) . '</pre>';
+		wp_die( $message );/**/
+
+
+	}
+=======
 		$message     = '<pre>' . print_r( $json_pretty, 1 ) . '	</pre>';
 		$message    .= 'ARGS <pre> ' . print_r( $url, 1 ) . '</pre>';
 		wp_die( $message );/**/
 
 
 	}	
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 }
 
 
 function pt_wc_rt_get_number_details( $number, $debug = false ) {
 
+<<<<<<< HEAD
+	$url   = esc_url_raw( pt_wc_rt_get_routetrust_url() . '/api/rt800/numbers/' . $number );
+=======
 	$url   = esc_url_raw( pt_wc_rt_get_ringboost_url() . '/local/' . $number );
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 	$args  = array(
 
@@ -364,7 +580,11 @@ function pt_wc_rt_get_number_details( $number, $debug = false ) {
 
 		if ( $debug ) {
 
+<<<<<<< HEAD
+			$message = esc_html__( 'Error getting number details: ', 'pt-wc-routetrust' ) .  ' 
+=======
 			$message = esc_html__( 'Error getting number details: ', 'pt-wc-ringboost' ) .  ' 
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 									<pre> ' . print_r( $response, 1 ) . '</pre>
 									<pre> ' . print_r( $args, 1 ) . '</pre>';
 			echo $message;
@@ -392,9 +612,15 @@ function pt_wc_rt_get_number_details( $number, $debug = false ) {
 }
 
 
+<<<<<<< HEAD
+function pt_wc_rt_reserve_number( $number, $debug = false ) {
+
+	$url   = esc_url_raw( pt_wc_rt_get_routetrust_url() . '/api/rt800/numbers/' . $number . '/reserve');
+=======
 function pt_wc_rt_reserve_number( $number ) {
 
 	$url   = esc_url_raw( pt_wc_rt_get_ringboost_url() . '/local/' . $number . '/reserve');
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 	$args  = array(
 
@@ -410,6 +636,25 @@ function pt_wc_rt_reserve_number( $number ) {
 
 	$response = wp_remote_post( $url, $args );
 
+<<<<<<< HEAD
+	if ( '201' == wp_remote_retrieve_response_code( $response ) ) {
+
+		return true;
+
+	} else {
+
+		if ( $debug ) {
+
+			$message = esc_html__( 'Error reserving number: ', 'pt-wc-routetrust' ) .  ' 
+									<pre> ' . print_r( $response, 1 ) . '</pre>
+									<pre> ' . print_r( $args, 1 ) . '</pre>';
+			wp_die( $message );
+
+		}
+
+
+		return false;
+=======
 	if ( '200' != wp_remote_retrieve_response_code( $response ) ) {
 
 		/**
@@ -433,6 +678,7 @@ function pt_wc_rt_reserve_number( $number ) {
 
 		return $json;
 
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 	}
 }
@@ -440,7 +686,11 @@ function pt_wc_rt_reserve_number( $number ) {
 
 function pt_wc_rt_release_number( $number, $debug = false ) {
 
+<<<<<<< HEAD
+	$url   = esc_url_raw( pt_wc_rt_get_routetrust_url() . '/api/rt800/numbers/' . $number . '/spare');
+=======
 	$url   = esc_url_raw( pt_wc_rt_get_ringboost_url() . '/local/' . $number . '/release');
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 	$args  = array(
 
@@ -456,11 +706,23 @@ function pt_wc_rt_release_number( $number, $debug = false ) {
 
 	$response = wp_remote_post( $url, $args );
 
+<<<<<<< HEAD
+	if ( '201' == wp_remote_retrieve_response_code( $response ) ) {
+
+		return true;
+
+	} else {
+
+		if ( $debug ) {
+
+			$message = esc_html__( 'Error releasing number: ', 'pt-wc-routetrust' ) .  ' 
+=======
 	if ( '200' != wp_remote_retrieve_response_code( $response ) ) {
 
 		if ( $debug ) {
 
 			$message = esc_html__( 'Error releasing number: ', 'pt-wc-ringboost' ) .  ' 
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 									<pre> ' . print_r( $response, 1 ) . '</pre>
 									<pre> ' . print_r( $args, 1 ) . '</pre>';
 			wp_die( $message );
@@ -469,6 +731,8 @@ function pt_wc_rt_release_number( $number, $debug = false ) {
 
 		return false;
 
+<<<<<<< HEAD
+=======
 	} else {
 
 		$response_body = wp_remote_retrieve_body( $response );
@@ -482,12 +746,16 @@ function pt_wc_rt_release_number( $number, $debug = false ) {
 
 		return $json;
 
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 	}
 }
 
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 add_action( 'plugins_loaded', 'pt_wc_rt_plugins_loaded', 20 );
 function pt_wc_rt_plugins_loaded() {
 
@@ -510,7 +778,11 @@ function pt_wc_rt_plugins_loaded() {
 	//add_action( 'admin_menu', 'pt_wc_rt_admin_menu', 10 );
 
 	// i18n
+<<<<<<< HEAD
+	load_plugin_textdomain( 'pt-wc-routetrust', false, '/pt-wc-routetrust/languages' );
+=======
 	load_plugin_textdomain( 'pt-wc-ringboost', false, '/pt-wc-ringboost/languages' );
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 
 	function pt_wc_rt_admin_menu() {
@@ -518,10 +790,17 @@ function pt_wc_rt_plugins_loaded() {
 		if ( current_user_can( 'manage_woocommerce' ) ) {
 
 			add_submenu_page( 'woocommerce',
+<<<<<<< HEAD
+				 __( 'Indica Tudo', 'pt-wc-routetrust' ),
+				 __( 'Indica Tudo', 'pt-wc-routetrust' ) ,
+				 'manage_woocommerce',
+				 'pt_wc_rt_routetrust_integration',
+=======
 				 __( 'Indica Tudo', 'pt-wc-ringboost' ),
 				 __( 'Indica Tudo', 'pt-wc-ringboost' ) ,
 				 'manage_woocommerce',
 				 'pt_wc_rt_ringboot_integration',
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 				 'pt_wc_rt_show_menu_page');
 		}
 	}
@@ -556,6 +835,15 @@ function pt_wc_rt_plugins_loaded() {
 			<h2 class="nav-tab-wrapper"> 
 
 				<a href="<?php echo admin_url('admin.php?page=woocommerce_indica_tudo&tab=api'); ?>" class="nav-tab <?php if ( $tab == 'api' ) echo 'nav-tab-active'; ?>">
+<<<<<<< HEAD
+				<?php esc_html_e( 'API', 'pt-wc-routetrust' ); ?></a>
+
+				<a href="<?php echo admin_url('admin.php?page=woocommerce_indica_tudo&tab=coupons'); ?>" class="nav-tab <?php if ( $tab == 'coupons' ) echo 'nav-tab-active'; ?>">
+				<?php esc_html_e( 'Coupons', 'pt-wc-routetrust' ); ?></a>
+
+				<a href="<?php echo admin_url('admin.php?page=woocommerce_indica_tudo&tab=log'); ?>" class="nav-tab <?php if ( $tab == 'log' ) echo 'nav-tab-active'; ?>">
+				<?php esc_html_e( 'Log', 'pt-wc-routetrust' ); ?></a> 
+=======
 				<?php esc_html_e( 'API', 'pt-wc-ringboost' ); ?></a>
 
 				<a href="<?php echo admin_url('admin.php?page=woocommerce_indica_tudo&tab=coupons'); ?>" class="nav-tab <?php if ( $tab == 'coupons' ) echo 'nav-tab-active'; ?>">
@@ -563,6 +851,7 @@ function pt_wc_rt_plugins_loaded() {
 
 				<a href="<?php echo admin_url('admin.php?page=woocommerce_indica_tudo&tab=log'); ?>" class="nav-tab <?php if ( $tab == 'log' ) echo 'nav-tab-active'; ?>">
 				<?php esc_html_e( 'Log', 'pt-wc-ringboost' ); ?></a> 
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 			</h2>
 		<?php
@@ -638,7 +927,11 @@ function pt_wc_rt_plugins_loaded() {
 
 					?>
 
+<<<<<<< HEAD
+					<h2><?php printf( esc_html__( 'Next API update %s', 'pt-wc-routetrust'), pt_wc_rt_better_human_time_diff( wp_next_scheduled( 'pt_wc_rt_api_check' ) ) ); ?></h2>
+=======
 					<h2><?php printf( esc_html__( 'Next API update %s', 'pt-wc-ringboost'), pt_wc_rt_better_human_time_diff( wp_next_scheduled( 'pt_wc_rt_api_check' ) ) ); ?></h2>
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 					<?php			
 				}
@@ -666,10 +959,17 @@ function pt_wc_rt_plugins_loaded() {
 		?>
 
 			<div class="panel woocommerce_options_panel">
+<<<<<<< HEAD
+				<h1><?php esc_html_e( 'Coupon rates', 'pt-wc-routetrust' ); ?></h1>
+				<pre><?php print_r( $rates ); ?></pre>
+				<hr />
+				<h1><?php esc_html_e( 'Coupons', 'pt-wc-routetrust' ); ?></h1>
+=======
 				<h1><?php esc_html_e( 'Coupon rates', 'pt-wc-ringboost' ); ?></h1>
 				<pre><?php print_r( $rates ); ?></pre>
 				<hr />
 				<h1><?php esc_html_e( 'Coupons', 'pt-wc-ringboost' ); ?></h1>
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 				<ol>
 					<?php
 
@@ -702,6 +1002,15 @@ function pt_wc_rt_plugins_loaded() {
 
 			<div class="panel woocommerce_options_panel">
 
+<<<<<<< HEAD
+				<h3><?php _e('Logged events', 'pt-wc-routetrust');?> <a href="<?php echo wp_nonce_url( admin_url('admin.php?page=woocommerce_indica_tudo&tab=log&clear_log=1' ), 'clear_log' ); ?>" class="button-primary right">    <?php _e( 'Clear Log', 'pt-wc-routetrust') ?> </a></h3>
+				<table class="widefat">
+					<thead>
+						<tr>
+							<th style="width: 150px"><?php _e( 'Timestamp', 'pt-wc-routetrust') ?></th>
+							<th><?php _e( 'Event', 'pt-wc-routetrust') ?></th>
+							<th><?php _e( 'User', 'pt-wc-routetrust') ?></th>
+=======
 				<h3><?php _e('Logged events', 'pt-wc-ringboost');?> <a href="<?php echo wp_nonce_url( admin_url('admin.php?page=woocommerce_indica_tudo&tab=log&clear_log=1' ), 'clear_log' ); ?>" class="button-primary right">    <?php _e( 'Clear Log', 'pt-wc-ringboost') ?> </a></h3>
 				<table class="widefat">
 					<thead>
@@ -709,6 +1018,7 @@ function pt_wc_rt_plugins_loaded() {
 							<th style="width: 150px"><?php _e( 'Timestamp', 'pt-wc-ringboost') ?></th>
 							<th><?php _e( 'Event', 'pt-wc-ringboost') ?></th>
 							<th><?php _e( 'User', 'pt-wc-ringboost') ?></th>
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 						</tr>
 					</thead>
 					<tbody>
@@ -835,9 +1145,15 @@ function pt_wc_rt_plugins_loaded() {
 
 		if ( plugin_basename( __FILE__ ) == $file ) {
 
+<<<<<<< HEAD
+			$url = get_admin_url() . 'admin.php?page=pt_wc_rt_routetrust_integration&tab=api';
+
+			$pt_wc_rt_settings_link = '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'pt-wc-routetrust' ) . '</a>';
+=======
 			$url = get_admin_url() . 'admin.php?page=pt_wc_rt_ringboot_integration&tab=api';
 
 			$pt_wc_rt_settings_link = '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'pt-wc-ringboost' ) . '</a>';
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 
 			// make the 'Settings' link appear first
 			array_unshift( $links, $pt_wc_rt_settings_link );
@@ -881,7 +1197,11 @@ function pt_wc_rt_plugins_loaded() {
 
 		if ( ! is_array( $log ) ) {
 			$log = array();
+<<<<<<< HEAD
+			array_push( $log, array( $time, __( 'Log Started.', 'pt-wc-routetrust' ), $current_user_id ) );
+=======
 			array_push( $log, array( $time, __( 'Log Started.', 'pt-wc-ringboost' ), $current_user_id ) );
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 		}
 
 		array_push( $log, array( $time, $event, $current_user_id ) );
@@ -898,7 +1218,11 @@ function pt_wc_rt_plugins_loaded() {
 			$log             = array();
 			$time_difference = get_option( 'gmt_offset' ) * 3600;
 			$time            = time() + $time_difference;
+<<<<<<< HEAD
+			array_push( $log, array( $time, __( 'Log Started.', 'pt-wc-routetrust' ), $current_user_id ) );
+=======
 			array_push( $log, array( $time, __( 'Log Started.', 'pt-wc-ringboost' ), $current_user_id ) );
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 			update_option( 'pt_wc_rt_log', $log );
 		}
 		return array_reverse( get_option( 'pt_wc_rt_log' ) );
@@ -911,7 +1235,11 @@ function pt_wc_rt_plugins_loaded() {
 		$log             = array();
 		$time_difference = get_option( 'gmt_offset' ) * 3600;
 		$time            = time() + $time_difference;
+<<<<<<< HEAD
+		array_push( $log, array( $time, __( 'Log cleared.', 'pt-wc-routetrust' ), $current_user_id ) );
+=======
 		array_push( $log, array( $time, __( 'Log cleared.', 'pt-wc-ringboost' ), $current_user_id ) );
+>>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
 		update_option( 'pt_wc_rt_log', $log );
 	}
 
