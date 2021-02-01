@@ -454,8 +454,6 @@ function pt_wc_rt_reserve_number( $number, $debug = false ) {
 
 		}
 
->>>>>>> 445ad8f913a86648e831b215d45f3f9ddceed758
-
 		return false;
 
 	}
