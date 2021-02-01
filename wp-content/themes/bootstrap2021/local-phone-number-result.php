@@ -89,8 +89,8 @@
                                 <td><?php echo $item->area_code; ?></td>
                                 <td><?php echo $item->city; ?></td>
                                 <td><?php echo $item->state; ?></td>
-                                <td><?php echo wc_price( $item->price / 100 ); ?></td>
-                                <td><a href="?pt_wc_rb_phone=<?php echo $item->phone;?>" class="button"><?php esc_html_e( 'Buy' ); ?></a></td>
+                                <td><?php echo wc_price( $item->price ); ?></td>
+                                <td>`<?php print_r( $item->price ); ?>`<a href="?pt_wc_rb_phone=<?php echo $item->phone;?>" class="button"><?php esc_html_e( 'Buy' ); ?></a></td>
                             </tr>
 
                             <?php
