@@ -3,7 +3,7 @@
  * Plugin Name: RingBoost Integration
  * Plugin URI: 
  * Description: Integrates RingBoost API actions
- * Version: 1.1
+ * Version: 1.2
  * Author: Gabriel Reguly
  * Author URI: 
  * Requires at least: 5.5
@@ -266,7 +266,7 @@ function pt_wc_rb_add_phone_to_cart() {
 
 function pt_wc_rb_get_ringboost_url() {
 
-	$url = 'https://partner.ringboost-stage.bigdropinc.net';
+	$url = 'https://partner.ringboost.com/';
 
 	return $url;
 }
@@ -274,7 +274,7 @@ function pt_wc_rb_get_ringboost_url() {
 
 function pt_wc_rb_get_token() {
 
-	$token = 'Bq9SRfARwgmegYpOHcBSegD0RFrQ8PeYemMp15TDNXOJFoOmXQFjf18mweXVkoL8';
+	$token = 'yoJpbJbqepwUq1ECNlclrNnxKYrDiRqNdOAwQyOHXmrCJm7l3ldwme8qkp460MHL';
 
 	return $token;
 }
