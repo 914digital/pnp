@@ -302,7 +302,7 @@ function pt_wc_rb_search_number() {
 
 	}
 
-	$url   = esc_url_raw( pt_wc_rb_get_ringboost_url() . '/local?call_for_price=false&per_page=10' . $vanity . $area_code );
+	$url   = esc_url_raw( pt_wc_rb_get_ringboost_url() . '/local?call_for_price=false&per_page=3000' . $vanity . $area_code );
 
 	$args  = array(
 
