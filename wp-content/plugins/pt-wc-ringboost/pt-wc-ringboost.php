@@ -3,7 +3,7 @@
  * Plugin Name: RingBoost Integration
  * Plugin URI: 
  * Description: Integrates RingBoost API actions
- * Version: 1.2
+ * Version: 1.3
  * Author: Gabriel Reguly
  * Author URI: 
  * Requires at least: 5.5
@@ -16,10 +16,10 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-add_action( 'init', 'pt_wc_rb_process_post' );
-function pt_wc_rb_process_post() {
+add_action( 'init', 'pt_wc_rb_process_search' );
+function pt_wc_rb_process_search() {
 
-	if ( isset( $_POST['pt_wc_rb_search_local'] ) ) {
+	if ( isset( $_POST['pt_wc_rb_search_local'] ) || isset( $_GET['pt_wc_rb_paged_search'] ) ) {
 
 		$phone_number = '7738406969';
 
@@ -282,9 +282,9 @@ function pt_wc_rb_get_token() {
 
 function pt_wc_rb_search_number() {
 
-	if ( isset( $_POST['pt_wc_rb_area'] ) && sanitize_text_field( $_POST['pt_wc_rb_area'] ) ) {
+	if ( isset( $_REQUEST['pt_wc_rb_area'] ) && sanitize_text_field( $_REQUEST['pt_wc_rb_area'] ) ) {
 
-		$area_code = '&area_code='. sanitize_text_field( $_POST['pt_wc_rb_area'] );
+		$area_code = '&area_code='. sanitize_text_field( $_REQUEST['pt_wc_rb_area'] );
 
 	} else {
 
@@ -292,9 +292,9 @@ function pt_wc_rb_search_number() {
 
 	}
 
-	if ( isset( $_POST['pt_wc_rb_vanity'] ) && sanitize_text_field( $_POST['pt_wc_rb_vanity'] ) ) {
+	if ( isset( $_REQUEST['pt_wc_rb_vanity'] ) && sanitize_text_field( $_REQUEST['pt_wc_rb_vanity'] ) ) {
 
-		$vanity = '&vanity='. sanitize_text_field( $_POST['pt_wc_rb_vanity'] );
+		$vanity = '&vanity='. sanitize_text_field( $_REQUEST['pt_wc_rb_vanity'] );
 
 	} else {
 
@@ -302,7 +302,17 @@ function pt_wc_rb_search_number() {
 
 	}
 
-	$url   = esc_url_raw( pt_wc_rb_get_ringboost_url() . '/local?call_for_price=false&per_page=3000' . $vanity . $area_code );
+	if ( isset( $_REQUEST['pt_wc_rb_page'] ) ) {
+
+		$page = intval( $_REQUEST['pt_wc_rb_page'] ) . '&';
+
+	} else {
+
+		$page = '1&';
+
+	}
+
+	$url   = esc_url_raw( pt_wc_rb_get_ringboost_url() . '/local?call_for_price=false&per_page=10&page=' . $page . $vanity . $area_code );
 
 	$args  = array(
 

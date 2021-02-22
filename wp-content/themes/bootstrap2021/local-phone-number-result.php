@@ -135,8 +135,98 @@
 
                         </tbody>
                     </table>
+                        <?php
 
-                <?php } ?>
+                            /*
+                              [page] => 1
+                              [pages] => 17
+                              [per_page] => 100
+                            */
+
+                            if ( $result->pages > 1 ) {
+
+                                $link = '&pt_wc_rb_paged_search=1&pt_wc_rb_area=' . sanitize_text_field( $_REQUEST['pt_wc_rb_area'] ) .'&pt_wc_rb_vanity=' . sanitize_text_field( $_REQUEST['pt_wc_rb_vanity'] );
+
+                                $i     = 0;
+                                $links = array();
+
+                                if ( $result->page != 1 ) {
+
+                                    $first_link = '<li class="page-item"><a class="page-link" href="?pt_wc_rb_page=' . ($result->page - 1) . $link . '">' . esc_html__('Previous') . '</a></li>';
+
+                                } else {
+
+                                    $first_link = '<li class="page-item disabled"><span class="page-link">' . esc_html__('Previous') . '</span></li>';
+
+                                }
+
+                                if ( $result->page == $result->pages ) {
+
+                                    $last_link = '<li class="page-item disabled"><span class="page-link">' . esc_html__('Next') . '</span></li>';
+
+                                } else {
+
+                                    $last_link = '<li class="page-item"><a class="page-link" href="?pt_wc_rb_page=' . ($result->page + 1) . $link . '">' . esc_html__('Next') . '</a></li>';
+
+                                }
+
+
+                                $limit   = 12;
+                                $counter = 1;
+                                $i       = $result->page;
+
+                                if ( $result->page > 1 && $result->page > ( $limit / 2 ) ) {
+
+                                    $links[] = '<li class="page-item"><a class="page-link" href="?pt_wc_rb_page=1' . $link . '">1</a></li>';
+                                    $links[] = '<li class="page-item disabled"><span class="page-link">' . esc_html__('...') . '</span></li>';
+
+                                    $i       = $result->page - $limit / 2;
+
+
+                                }
+
+
+                                while ( $i <= $result->pages ) {
+
+                                    if ( $counter++ < $limit ) {
+
+                                        if ( $i == $result->page ) {
+
+                                            $links[] = '<li class="page-item active"><span class="page-link">' . $i . '</span></li>';
+
+                                        } else {
+
+                                            $links[] = '<li class="page-item"><a class="page-link" href="?pt_wc_rb_page=' . $i . $link . '">' . $i . '</a></li>';
+
+                                        }    
+                                    }
+                                    $i++;
+                                 }
+
+                                 if ( $result->page < $result->pages - ( $limit / 2 ) ) {
+
+                                    $links[] = '<li class="page-item disabled"><span class="page-link">' . esc_html__('...') . '</span></li>';
+
+                                    $links[] = '<li class="page-item"><a class="page-link" href="?pt_wc_rb_page=' . ( $result->pages ) . $link . '">' . ( $result->pages ) . '</a></li>';
+
+                                }
+
+                                 //echo " $i <pre>" . print_r( $links, 1 ) . '</pre>';
+                            
+                            ?>
+                            <nav>
+                                <ul class="pagination justify-content-center">
+                                    <?php echo $first_link; ?>
+                                    <?php echo implode( "\n\t", $links ); ?>
+                                    <?php echo $last_link; ?>
+                                </ul>
+                            </nav>
+                            <?php
+
+                            }
+                    } 
+
+                ?>
 
            </div>
         </div>
@@ -156,11 +246,11 @@
                     <div class="form-row align-items-center">
                         <div class="form-group col-md-3">
                             <label class="sr-only" for="localArea">Area Code</label>
-                            <input type="text" name="pt_wc_rb_area" class="form-control" id="localArea" placeholder="Area Code" value="<?php echo sanitize_text_field( $_POST['pt_wc_rb_area'] )?>">
+                            <input type="text" name="pt_wc_rb_area" class="form-control" id="localArea" placeholder="Area Code" value="<?php echo sanitize_text_field( $_REQUEST['pt_wc_rb_area'] )?>">
                         </div>
                         <div class="form-group col-md-6">
                             <label class="sr-only" for="localWord"></label>
-                            <input type="text" class="form-control" id="localWord" placeholder="keyword/number" name="pt_wc_rb_vanity" data-swplive="true" value="<?php echo sanitize_text_field( $_POST['pt_wc_rb_vanity'] ); ?>" /> <!-- data-swplive="true" enables SearchWP Live Search -->
+                            <input type="text" class="form-control" id="localWord" placeholder="keyword/number" name="pt_wc_rb_vanity" data-swplive="true" value="<?php echo sanitize_text_field( $_REQUEST['pt_wc_rb_vanity'] ); ?>" /> <!-- data-swplive="true" enables SearchWP Live Search -->
                         </div>
                         <div class="form-group col-md-3">
                             <button type="submit" class="btn btn-primary w-100">Search</button>
