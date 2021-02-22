@@ -34,6 +34,7 @@ function pt_wc_rb_process_search() {
 	}
 }
 
+
 add_action( 'wp_loaded', 'pt_wc_rb_process_get' );
 function pt_wc_rb_process_get() {
 
@@ -75,15 +76,15 @@ function pt_wc_rb_order_number( $number ) {
 	} else {
 
 		$response_body = wp_remote_retrieve_body( $response );
-		$json          = json_decode( $response_body );
+		$result        = json_decode( $response_body );
 		
-		/**/
+		/**
 		$json_pretty = json_encode( json_decode( $response_body ), JSON_PRETTY_PRINT );
-		$message = '<pre>' . print_r( $json, 1 ) . '	</pre>';
+		$message = '<pre>' . print_r( $result, 1 ) . '	</pre>';
 		$message .= 'ARGS <pre> ' . print_r( $url, 1 ) . '</pre>';
 		wp_die( $message );/**/
 
-		return $json;
+		return $result;
 
 	}
 }
@@ -339,12 +340,12 @@ function pt_wc_rb_search_number() {
 	} else {
 
 		$response_body = wp_remote_retrieve_body( $response );
-		$json = json_decode( $response_body );
+		$result        = json_decode( $response_body );
 
-		return $json;
+		return $result;
 
 		/**
-		$json_pretty = json_encode( $json, JSON_PRETTY_PRINT );
+		$json_pretty = json_encode( $result, JSON_PRETTY_PRINT );
 		$message     = '<pre>' . print_r( $json_pretty, 1 ) . '	</pre>';
 		$message    .= 'ARGS <pre> ' . print_r( $url, 1 ) . '</pre>';
 		wp_die( $message );/**/
@@ -387,18 +388,18 @@ function pt_wc_rb_get_number_details( $number, $debug = false ) {
 	} else {
 
 		$response_body = wp_remote_retrieve_body( $response );
-		$json          = json_decode( $response_body );
+		$result        = json_decode( $response_body );
 
 		if ( $debug ) {
 			
 			$json_pretty = json_encode( json_decode( $response_body ), JSON_PRETTY_PRINT );
-			$message = '<pre>' . print_r( $json, 1 ) . '	</pre>';
+			$message = '<pre>' . print_r( $json_pretty, 1 ) . '	</pre>';
 			$message .= 'ARGS <pre> ' . print_r( $url, 1 ) . '</pre>';
 			echo $message;
 
 		}
 
-		return $json;
+		return $result;
 
 	}
 }
@@ -435,15 +436,15 @@ function pt_wc_rb_reserve_number( $number ) {
 	} else {
 
 		$response_body = wp_remote_retrieve_body( $response );
-		$json          = json_decode( $response_body );
+		$result        = json_decode( $response_body );
 
 		/**
 		$json_pretty = json_encode( json_decode( $response_body ), JSON_PRETTY_PRINT );
-		$message = '<pre>' . print_r( $json, 1 ) . '	</pre>';
+		$message = '<pre>' . print_r( $json_pretty , 1 ) . '	</pre>';
 		$message .= 'ARGS <pre> ' . print_r( $url, 1 ) . '</pre>';
 		wp_die( $message );/**/
 
-		return $json;
+		return $result;
 
 
 	}
@@ -484,20 +485,18 @@ function pt_wc_rb_release_number( $number, $debug = false ) {
 	} else {
 
 		$response_body = wp_remote_retrieve_body( $response );
-		$json          = json_decode( $response_body );
+		$result        = json_decode( $response_body );
 
 		/**
 		$json_pretty = json_encode( json_decode( $response_body ), JSON_PRETTY_PRINT );
-		$message = '<pre>' . print_r( $json, 1 ) . '	</pre>';
+		$message = '<pre>' . print_r( $json_pretty, 1 ) . '	</pre>';
 		$message .= 'ARGS <pre> ' . print_r( $url, 1 ) . '</pre>';
 		wp_die( $message );/**/
 
-		return $json;
+		return $result;
 
 	}
 }
-
-
 
 
 add_action( 'plugins_loaded', 'pt_wc_rb_plugins_loaded', 20 );
