@@ -36,8 +36,6 @@
                     $subject     = esc_html_( 'API error reporting for ' . site_url() );
                     wp_mail( $admin_email, $subject, $message );
 
-
-
                     ?>
 
                     <p><?php esc_html_e( 'There are no matching numbers from your query. Please try again.' ); ?></p>
@@ -53,7 +51,6 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col"><?php esc_html_e( 'Phone number' ); ?></th>
-                                <th scope="col"><?php esc_html_e( 'Area code' ); ?></th>
                                 <th scope="col"><?php esc_html_e( 'City' ); ?></th>
                                 <th scope="col"><?php esc_html_e( 'State' ); ?></th>
                                 <th scope="col"><?php esc_html_e( 'Price' ); ?></th>
@@ -69,6 +66,9 @@
                             //echo '<pre>' . print_r( $item, 1 ) . '</pre>';
 
                             /*
+                                [phone]  => 7245974663
+                                [vanity] => 724597home
+
                                 [phone] => 3055214982
                                 [area_code] => 305
                                 [city] => MIAMI
@@ -81,12 +81,28 @@
                                 [call_for_price] => 
                                 [price] => 99
                             */
+                            if ( ! $item->vanity ) {
+
+                                $number = substr( $item->phone, 3 );
+
+                            } else {
+                                
+                                $number = strtoupper( substr( $item->vanity, 3 ) );
+
+                                $position = strspn( $item->vanity, $item->phone ) - 3;
+
+                                if ( $position ) { 
+
+                                    $number = substr_replace( $number, ' - ', $position, 0 );
+                                }
+
+
+                            }                             
 
                             ?>
 
-                            <tr>
-                                <th scope="row"><?php echo str_replace( $item->area_code, '', $item->phone ); ?></th>
-                                <td><?php echo $item->area_code; ?></td>
+                            <tr>                          
+                                <th scope="row"> (<?php echo $item->area_code;?>) <?php echo $number ?></th>
                                 <td><?php echo $item->city; ?></td>
                                 <td><?php echo $item->state; ?></td>
                                     <?php 
