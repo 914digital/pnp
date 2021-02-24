@@ -3,7 +3,7 @@
  * Plugin Name: RingBoost Integration
  * Plugin URI: 
  * Description: Integrates RingBoost API actions
- * Version: 1.3
+ * Version: 1.4
  * Author: Gabriel Reguly
  * Author URI: 
  * Requires at least: 5.5
@@ -152,6 +152,14 @@ function pt_wc_rb_restore_phone_to_cart( $cart_item_key, $cart ) {
 }
 
 
+function pt_wc_rb_get_markup() {
+
+	$markup_value = 1.20; // 20%
+
+	return $markup_value;
+} 
+
+
 function pt_wc_rb_add_phone_to_cart() {
 
 	$phone_number = sanitize_text_field( $_GET['pt_wc_rb_phone'] );
@@ -186,6 +194,8 @@ function pt_wc_rb_add_phone_to_cart() {
 
 		if ( ! $product_id ) {
 
+			$markup_value = pt_wc_rb_get_markup();
+
 			$args = array(	   
 				'post_author' => 1, 
 				'post_content' => '',
@@ -200,8 +210,8 @@ function pt_wc_rb_add_phone_to_cart() {
 
 			$product = wc_get_product( $product_id );
 
-			$product->set_price( $details->price );
-			$product->set_regular_price( $details->price );
+			$product->set_price( $details->price * $markup_value );
+			$product->set_regular_price( $details->price * $markup_value );
 			$product->set_virtual( 'yes' );
 			$product->set_sku( $phone_number );
 			$product->set_stock_status( 'instock' );

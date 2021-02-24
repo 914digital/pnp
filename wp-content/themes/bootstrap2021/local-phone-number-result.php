@@ -61,6 +61,8 @@
 
                     <?php
 
+                        $markup_value = pt_wc_rb_get_markup();
+
                         foreach ( $result->items as $item ) {
 
                             //echo '<pre>' . print_r( $item, 1 ) . '</pre>';
@@ -81,6 +83,8 @@
                                 [call_for_price] => 
                                 [price] => 99
                             */
+
+                            
                             if ( ! $item->vanity ) {
 
                                 $number = substr( $item->phone, 3 );
@@ -117,9 +121,11 @@
 
                                         } else {
 
+                                                $price = wc_price( $item->price * $markup_value );
+
                                             ?>
-                                                <td><?php echo wc_price( $item->price ); ?></td>
-                                                <td><a href="?pt_wc_rb_phone=<?php echo $item->phone;?>" class="button"><?php esc_html_e( 'Buy' ); ?></a></td>
+                                                <td><?php echo $price; ?></td>
+                                                <td><a href="?pt_wc_rb_phone=<?php echo $item->phone;?>" class="btn btn-primary "><?php esc_html_e( 'Buy' ); ?></a></td>
 
                                             <?php
 
