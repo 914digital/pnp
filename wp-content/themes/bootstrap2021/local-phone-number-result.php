@@ -29,7 +29,7 @@
 
                 <?php if ( ! $result || ! $result->items ) { 
 
-                    $message = esc_html_e( 'Sorry, an error occurred while searching phone numbers. Please check the API results.' );
+                    $message = esc_html__( 'Sorry, an error occurred while searching phone numbers. Please check the API results.' );
                     $message .= print_r( $result, 1);
 
                     $admin_email = array( get_option('admin_email') );
