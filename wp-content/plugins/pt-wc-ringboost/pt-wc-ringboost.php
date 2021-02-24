@@ -280,13 +280,13 @@ function pt_wc_rb_search_number() {
 
 	}
 
-	if ( isset( $_REQUEST['pt_wc_rb_page'] ) ) {
+	if ( isset( $_POST['pt_wc_rb_search_local'] ) || ! isset( $_GET['pt_wc_rb_page'] ) ) {
 
-		$page = intval( $_REQUEST['pt_wc_rb_page'] ) . '&';
+		$page = '1&';
 
 	} else {
 
-		$page = '1&';
+		$page = intval( $_GET['pt_wc_rb_page'] ) . '&';
 
 	}
 
