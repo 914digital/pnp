@@ -1,0 +1,12 @@
+2021-02-01T15:07:30+00:00 CRITICAL Uncaught Error: Call to undefined function the_field() in /Users/danmartino/Local Sites/pnp/app/public/wp-content/themes/bootstrap2021/parts/header.php:44
+Stack trace:
+#0 /Users/danmartino/Local Sites/pnp/app/public/wp-includes/template.php(732): require()
+#1 /Users/danmartino/Local Sites/pnp/app/public/wp-includes/template.php(676): load_template('/Users/danmarti...', false, Array)
+#2 /Users/danmartino/Local Sites/pnp/app/public/wp-includes/general-template.php(204): locate_template(Array, true, false, Array)
+#3 /Users/danmartino/Local Sites/pnp/app/public/wp-content/themes/bootstrap2021/front-page.php(1): get_template_part('parts/header')
+#4 /Users/danmartino/Local Sites/pnp/app/public/wp-includes/template-loader.php(106): include('/Users/danmarti...')
+#5 /Users/danmartino/Local Sites/pnp/app/public/wp-blog-header.php(19): require_once('/Users/danmarti...')
+#6 /Users/danmartino/Local Sites/pnp/app/public/index.php(17): require('/Users/danmarti...')
+#7 {main}
+  thrown in /Users/danmartino/Local Sites/pnp/app/public/wp-content/themes/bootstrap2021/parts/header.php on line 44
+

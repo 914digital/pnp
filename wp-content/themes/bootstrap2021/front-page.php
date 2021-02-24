@@ -24,52 +24,30 @@
                     <div class="mb-search mt-5" data-aos="fade-in" data-aos-duration="1000">
                         <div class="row">
                             <div class="col-md-8 offset-md-2">
-                            <nav>
-                            <div class="nav nav-tabs justify-content-center mb-3" id="nav-tab" role="tablist">
-                                <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-local" role="tab" aria-controls="nav-local" aria-selected="<?php echo $local_aria;?>">Local</a>
-                                <a class="nav-link" id="nav-toll-free-tab" data-toggle="tab" href="#nav-toll-free" role="tab" aria-controls="nav-profile" aria-selected="<?php echo $tollfree_aria;?>">Toll Free</a>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade <?php echo $local_pane; ?>" id="nav-local" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <form method="post">
-                                <input type="hidden" name="pt_wc_rb_search_local" value="1">
-                                <div class="form-row align-items-center">
-                                    <div class="form-group col-md-3">
-                                        <label class="sr-only" for="localArea">Area Code</label>
-                                        <input type="text" name="pt_wc_rb_area" class="form-control" id="localArea" placeholder="Area Code">
+                                <nav>
+                                    <div class="nav nav-tabs justify-content-center mb-3" id="nav-tab" role="tablist">
+                                        <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-local" role="tab" aria-controls="nav-local" aria-selected="<?php echo $local_aria;?>">Local</a>
+                                        <a class="nav-link" href="/toll-free-numbers/">Toll Free</a>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="sr-only" for="localWord"></label>
-                                        <input type="text" class="form-control" id="localWord" placeholder="keyword/number" name="pt_wc_rb_vanity" data-swplive="true" /> <!-- data-swplive="true" enables SearchWP Live Search -->
+                                </nav>
+                                <form method="post">
+                                    <input type="hidden" name="pt_wc_rb_search_local" value="1">
+                                    <div class="form-row align-items-center">
+                                        <div class="form-group col-md-3">
+                                            <label class="sr-only" for="localArea">Area Code</label>
+                                            <input type="text" name="pt_wc_rb_area" class="form-control" id="localArea" placeholder="Area Code">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="sr-only" for="localWord"></label>
+                                            <input type="text" class="form-control" id="localWord" placeholder="keyword/number" name="pt_wc_rb_vanity" data-swplive="true" /> <!-- data-swplive="true" enables SearchWP Live Search -->
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <button type="submit" class="btn btn-primary w-100">Search</button>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        <button type="submit" class="btn btn-primary w-100">Search</button>
-                                    </div>
-                                </div>
-                            </form>
-                            </div>
-                            <div class="tab-pane fade <?php echo $tollfree_pane; ?>" id="nav-toll-free" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <form method="post">
-                                <input type="hidden" name="pt_wc_rt_search_tollfree" value="1">
-                                <div class="form-row align-items-center">
-                                    <div class="form-group col-md-3">
-                                       <span class="tollfree">1-8XX</span>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="sr-only" for="tollFreeNumber"></label>
-                                        <input type="text" name="pt_wc_rt_vanity" class="form-control" id="tollFreeNumber" placeholder="keyword/number">
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <button type="submit" class="btn btn-primary w-100">Search</button>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
                             </div>
                         </div>
-                            </div>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
@@ -120,7 +98,7 @@
 <section class="home-text">
     <div class="container">
         <div class="row mt-5">
-            <div class="col-md-6" data-aos="fade-right" data-aos-duration="1000">
+            <div class="col-md-6 mb-5" data-aos="fade-right" data-aos-duration="1000">
                 <div class="hc-text">
                     <h3>Don't Be Just Another <span>Number</span> </h3>
                     <p>Hi! We're <strong>phoneNumber<sup>+</sup></strong>. We want to help build your business or personal brand by finding a memorable, customized phone number. Let us make your digits count--and stand out from the crowd.</p>
@@ -139,7 +117,7 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <h4 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="50">We Work With All the Major Carriers</h4>
-                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis perspiciatis explicabo magnam quae consectetur blanditiis vero vitae aliquid dolores pariatur. Corporis ipsa, enim numquam temporibus excepturi culpa voluptatibus fuga tempora.</p>
+                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250">Pair your new number with a carrier plan. We partner with specialists at telecom providers across the country, to make sure that you have the right expert giving you the best possible service. Choose from any of the following partners and be connected with a live and dedicated representative to ensure a headache-free process.</p>
                 <a class="btn btn-primary mt-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="250" href="/carriers" >See All Carriers</a>
             </div>
         </div>
@@ -196,7 +174,7 @@
             
             <div class="col-md-6" data-aos="fade-left" data-aos-duration="1000">
                 <h4>We Specialize In Multiple <span>Industries</span></h4>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed explicabo, provident dolorum odio quidem officia incidunt pariatur quae alias debitis.</p>
+                <p>Whatever your business is, we can help get you a number that will help your current and future customers easily remember to reach out. Contact us today.</p>
                 <a href="/industries" class="btn btn-primary">Learn More</a>
             </div>
         </div>
@@ -204,12 +182,12 @@
     </div>
 </section>
 
-<section class="industries mb">
+<section class="industries text-center mb">
     <div class="container">
         <div class="row">
         <div class="col-md-6 mb-5" data-aos="fade-left" data-aos-duration="1000">
                 <h4>We Specialize In Multiple <span>Industries</span></h4>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed explicabo, provident dolorum odio quidem officia incidunt pariatur quae alias debitis.</p>
+                <p>Whatever your business is, we can help get you a number that will help your current and future customers easily remember to reach out. Contact us today.</p>
                 <a href="/industries" class="btn btn-primary">Learn More</a>
             </div>
             <div class="col-md-6 ind-icons" data-aos="fade-right" data-aos-duration="1000">

@@ -3,7 +3,7 @@
  * Plugin Name: RingBoost Integration
  * Plugin URI: 
  * Description: Integrates RingBoost API actions
- * Version: 1.1
+ * Version: 1.3
  * Author: Gabriel Reguly
  * Author URI: 
  * Requires at least: 5.5
@@ -16,10 +16,10 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-add_action( 'init', 'pt_wc_rb_process_post' );
-function pt_wc_rb_process_post() {
+add_action( 'init', 'pt_wc_rb_process_search' );
+function pt_wc_rb_process_search() {
 
-	if ( isset( $_POST['pt_wc_rb_search_local'] ) ) {
+	if ( isset( $_POST['pt_wc_rb_search_local'] ) || isset( $_GET['pt_wc_rb_paged_search'] ) ) {
 
 		$phone_number = '7738406969';
 
@@ -33,6 +33,7 @@ function pt_wc_rb_process_post() {
 
 	}
 }
+
 
 add_action( 'wp_loaded', 'pt_wc_rb_process_get' );
 function pt_wc_rb_process_get() {
@@ -75,15 +76,15 @@ function pt_wc_rb_order_number( $number ) {
 	} else {
 
 		$response_body = wp_remote_retrieve_body( $response );
-		$json          = json_decode( $response_body );
+		$result        = json_decode( $response_body );
 		
-		/**/
+		/**
 		$json_pretty = json_encode( json_decode( $response_body ), JSON_PRETTY_PRINT );
-		$message = '<pre>' . print_r( $json, 1 ) . '	</pre>';
+		$message = '<pre>' . print_r( $result, 1 ) . '	</pre>';
 		$message .= 'ARGS <pre> ' . print_r( $url, 1 ) . '</pre>';
 		wp_die( $message );/**/
 
-		return $json;
+		return $result;
 
 	}
 }
@@ -266,7 +267,7 @@ function pt_wc_rb_add_phone_to_cart() {
 
 function pt_wc_rb_get_ringboost_url() {
 
-	$url = 'https://partner.ringboost-stage.bigdropinc.net';
+	$url = 'https://partner.ringboost.com/';
 
 	return $url;
 }
@@ -274,7 +275,7 @@ function pt_wc_rb_get_ringboost_url() {
 
 function pt_wc_rb_get_token() {
 
-	$token = 'Bq9SRfARwgmegYpOHcBSegD0RFrQ8PeYemMp15TDNXOJFoOmXQFjf18mweXVkoL8';
+	$token = 'yoJpbJbqepwUq1ECNlclrNnxKYrDiRqNdOAwQyOHXmrCJm7l3ldwme8qkp460MHL';
 
 	return $token;
 }
@@ -282,9 +283,9 @@ function pt_wc_rb_get_token() {
 
 function pt_wc_rb_search_number() {
 
-	if ( isset( $_POST['pt_wc_rb_area'] ) && sanitize_text_field( $_POST['pt_wc_rb_area'] ) ) {
+	if ( isset( $_REQUEST['pt_wc_rb_area'] ) && sanitize_text_field( $_REQUEST['pt_wc_rb_area'] ) ) {
 
-		$area_code = '&area_code='. sanitize_text_field( $_POST['pt_wc_rb_area'] );
+		$area_code = '&area_code='. sanitize_text_field( $_REQUEST['pt_wc_rb_area'] );
 
 	} else {
 
@@ -292,9 +293,9 @@ function pt_wc_rb_search_number() {
 
 	}
 
-	if ( isset( $_POST['pt_wc_rb_vanity'] ) && sanitize_text_field( $_POST['pt_wc_rb_vanity'] ) ) {
+	if ( isset( $_REQUEST['pt_wc_rb_vanity'] ) && sanitize_text_field( $_REQUEST['pt_wc_rb_vanity'] ) ) {
 
-		$vanity = '&vanity='. sanitize_text_field( $_POST['pt_wc_rb_vanity'] );
+		$vanity = '&vanity='. sanitize_text_field( $_REQUEST['pt_wc_rb_vanity'] );
 
 	} else {
 
@@ -302,7 +303,17 @@ function pt_wc_rb_search_number() {
 
 	}
 
-	$url   = esc_url_raw( pt_wc_rb_get_ringboost_url() . '/local?call_for_price=false&per_page=10' . $vanity . $area_code );
+	if ( isset( $_REQUEST['pt_wc_rb_page'] ) ) {
+
+		$page = intval( $_REQUEST['pt_wc_rb_page'] ) . '&';
+
+	} else {
+
+		$page = '1&';
+
+	}
+
+	$url   = esc_url_raw( pt_wc_rb_get_ringboost_url() . '/local?call_for_price=false&per_page=10&page=' . $page . $vanity . $area_code );
 
 	$args  = array(
 
@@ -329,12 +340,12 @@ function pt_wc_rb_search_number() {
 	} else {
 
 		$response_body = wp_remote_retrieve_body( $response );
-		$json = json_decode( $response_body );
+		$result        = json_decode( $response_body );
 
-		return $json;
+		return $result;
 
 		/**
-		$json_pretty = json_encode( $json, JSON_PRETTY_PRINT );
+		$json_pretty = json_encode( $result, JSON_PRETTY_PRINT );
 		$message     = '<pre>' . print_r( $json_pretty, 1 ) . '	</pre>';
 		$message    .= 'ARGS <pre> ' . print_r( $url, 1 ) . '</pre>';
 		wp_die( $message );/**/
@@ -377,18 +388,18 @@ function pt_wc_rb_get_number_details( $number, $debug = false ) {
 	} else {
 
 		$response_body = wp_remote_retrieve_body( $response );
-		$json          = json_decode( $response_body );
+		$result        = json_decode( $response_body );
 
 		if ( $debug ) {
 			
 			$json_pretty = json_encode( json_decode( $response_body ), JSON_PRETTY_PRINT );
-			$message = '<pre>' . print_r( $json, 1 ) . '	</pre>';
+			$message = '<pre>' . print_r( $json_pretty, 1 ) . '	</pre>';
 			$message .= 'ARGS <pre> ' . print_r( $url, 1 ) . '</pre>';
 			echo $message;
 
 		}
 
-		return $json;
+		return $result;
 
 	}
 }
@@ -425,15 +436,15 @@ function pt_wc_rb_reserve_number( $number ) {
 	} else {
 
 		$response_body = wp_remote_retrieve_body( $response );
-		$json          = json_decode( $response_body );
+		$result        = json_decode( $response_body );
 
 		/**
 		$json_pretty = json_encode( json_decode( $response_body ), JSON_PRETTY_PRINT );
-		$message = '<pre>' . print_r( $json, 1 ) . '	</pre>';
+		$message = '<pre>' . print_r( $json_pretty , 1 ) . '	</pre>';
 		$message .= 'ARGS <pre> ' . print_r( $url, 1 ) . '</pre>';
 		wp_die( $message );/**/
 
-		return $json;
+		return $result;
 
 
 	}
@@ -474,20 +485,18 @@ function pt_wc_rb_release_number( $number, $debug = false ) {
 	} else {
 
 		$response_body = wp_remote_retrieve_body( $response );
-		$json          = json_decode( $response_body );
+		$result        = json_decode( $response_body );
 
 		/**
 		$json_pretty = json_encode( json_decode( $response_body ), JSON_PRETTY_PRINT );
-		$message = '<pre>' . print_r( $json, 1 ) . '	</pre>';
+		$message = '<pre>' . print_r( $json_pretty, 1 ) . '	</pre>';
 		$message .= 'ARGS <pre> ' . print_r( $url, 1 ) . '</pre>';
 		wp_die( $message );/**/
 
-		return $json;
+		return $result;
 
 	}
 }
-
-
 
 
 add_action( 'plugins_loaded', 'pt_wc_rb_plugins_loaded', 20 );

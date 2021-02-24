@@ -36,8 +36,6 @@
                     $subject     = esc_html_( 'API error reporting for ' . site_url() );
                     wp_mail( $admin_email, $subject, $message );
 
-
-
                     ?>
 
                     <p><?php esc_html_e( 'There are no matching numbers from your query. Please try again.' ); ?></p>
@@ -53,7 +51,6 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col"><?php esc_html_e( 'Phone number' ); ?></th>
-                                <th scope="col"><?php esc_html_e( 'Area code' ); ?></th>
                                 <th scope="col"><?php esc_html_e( 'City' ); ?></th>
                                 <th scope="col"><?php esc_html_e( 'State' ); ?></th>
                                 <th scope="col"><?php esc_html_e( 'Price' ); ?></th>
@@ -69,6 +66,9 @@
                             //echo '<pre>' . print_r( $item, 1 ) . '</pre>';
 
                             /*
+                                [phone]  => 7245974663
+                                [vanity] => 724597home
+
                                 [phone] => 3055214982
                                 [area_code] => 305
                                 [city] => MIAMI
@@ -81,12 +81,28 @@
                                 [call_for_price] => 
                                 [price] => 99
                             */
+                            if ( ! $item->vanity ) {
+
+                                $number = substr( $item->phone, 3 );
+
+                            } else {
+                                
+                                $number = strtoupper( substr( $item->vanity, 3 ) );
+
+                                $position = strspn( $item->vanity, $item->phone ) - 3;
+
+                                if ( $position ) { 
+
+                                    $number = substr_replace( $number, ' - ', $position, 0 );
+                                }
+
+
+                            }                             
 
                             ?>
 
-                            <tr>
-                                <th scope="row"><?php echo str_replace( $item->area_code, '', $item->phone ); ?></th>
-                                <td><?php echo $item->area_code; ?></td>
+                            <tr>                          
+                                <th scope="row"> (<?php echo $item->area_code;?>) <?php echo $number ?></th>
                                 <td><?php echo $item->city; ?></td>
                                 <td><?php echo $item->state; ?></td>
                                     <?php 
@@ -119,8 +135,98 @@
 
                         </tbody>
                     </table>
+                        <?php
 
-                <?php } ?>
+                            /*
+                              [page] => 1
+                              [pages] => 17
+                              [per_page] => 100
+                            */
+
+                            if ( $result->pages > 1 ) {
+
+                                $link = '&pt_wc_rb_paged_search=1&pt_wc_rb_area=' . sanitize_text_field( $_REQUEST['pt_wc_rb_area'] ) .'&pt_wc_rb_vanity=' . sanitize_text_field( $_REQUEST['pt_wc_rb_vanity'] );
+
+                                $i     = 0;
+                                $links = array();
+
+                                if ( $result->page != 1 ) {
+
+                                    $first_link = '<li class="page-item"><a class="page-link" href="?pt_wc_rb_page=' . ($result->page - 1) . $link . '">' . esc_html__('Previous') . '</a></li>';
+
+                                } else {
+
+                                    $first_link = '<li class="page-item disabled"><span class="page-link">' . esc_html__('Previous') . '</span></li>';
+
+                                }
+
+                                if ( $result->page == $result->pages ) {
+
+                                    $last_link = '<li class="page-item disabled"><span class="page-link">' . esc_html__('Next') . '</span></li>';
+
+                                } else {
+
+                                    $last_link = '<li class="page-item"><a class="page-link" href="?pt_wc_rb_page=' . ($result->page + 1) . $link . '">' . esc_html__('Next') . '</a></li>';
+
+                                }
+
+
+                                $limit   = 12;
+                                $counter = 1;
+                                $i       = $result->page;
+
+                                if ( $result->page > 1 && $result->page > ( $limit / 2 ) ) {
+
+                                    $links[] = '<li class="page-item"><a class="page-link" href="?pt_wc_rb_page=1' . $link . '">1</a></li>';
+                                    $links[] = '<li class="page-item disabled"><span class="page-link">' . esc_html__('...') . '</span></li>';
+
+                                    $i       = $result->page - $limit / 2;
+
+
+                                }
+
+
+                                while ( $i <= $result->pages ) {
+
+                                    if ( $counter++ < $limit ) {
+
+                                        if ( $i == $result->page ) {
+
+                                            $links[] = '<li class="page-item active"><span class="page-link">' . $i . '</span></li>';
+
+                                        } else {
+
+                                            $links[] = '<li class="page-item"><a class="page-link" href="?pt_wc_rb_page=' . $i . $link . '">' . $i . '</a></li>';
+
+                                        }    
+                                    }
+                                    $i++;
+                                 }
+
+                                 if ( $result->page < $result->pages - ( $limit / 2 ) ) {
+
+                                    $links[] = '<li class="page-item disabled"><span class="page-link">' . esc_html__('...') . '</span></li>';
+
+                                    $links[] = '<li class="page-item"><a class="page-link" href="?pt_wc_rb_page=' . ( $result->pages ) . $link . '">' . ( $result->pages ) . '</a></li>';
+
+                                }
+
+                                 //echo " $i <pre>" . print_r( $links, 1 ) . '</pre>';
+                            
+                            ?>
+                            <nav>
+                                <ul class="pagination justify-content-center">
+                                    <?php echo $first_link; ?>
+                                    <?php echo implode( "\n\t", $links ); ?>
+                                    <?php echo $last_link; ?>
+                                </ul>
+                            </nav>
+                            <?php
+
+                            }
+                    } 
+
+                ?>
 
            </div>
         </div>
@@ -140,11 +246,11 @@
                     <div class="form-row align-items-center">
                         <div class="form-group col-md-3">
                             <label class="sr-only" for="localArea">Area Code</label>
-                            <input type="text" name="pt_wc_rb_area" class="form-control" id="localArea" placeholder="Area Code" value="<?php echo sanitize_text_field( $_POST['pt_wc_rb_area'] )?>">
+                            <input type="text" name="pt_wc_rb_area" class="form-control" id="localArea" placeholder="Area Code" value="<?php echo sanitize_text_field( $_REQUEST['pt_wc_rb_area'] )?>">
                         </div>
                         <div class="form-group col-md-6">
                             <label class="sr-only" for="localWord"></label>
-                            <input type="text" class="form-control" id="localWord" placeholder="keyword/number" name="pt_wc_rb_vanity" data-swplive="true" value="<?php echo sanitize_text_field( $_POST['pt_wc_rb_vanity'] ); ?>" /> <!-- data-swplive="true" enables SearchWP Live Search -->
+                            <input type="text" class="form-control" id="localWord" placeholder="keyword/number" name="pt_wc_rb_vanity" data-swplive="true" value="<?php echo sanitize_text_field( $_REQUEST['pt_wc_rb_vanity'] ); ?>" /> <!-- data-swplive="true" enables SearchWP Live Search -->
                         </div>
                         <div class="form-group col-md-3">
                             <button type="submit" class="btn btn-primary w-100">Search</button>

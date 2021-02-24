@@ -2,13 +2,13 @@
 /*
    Plugin Name: Authorize.net Payment Gateway For WooCommerce
    Description: Extends WooCommerce to Process Payments with Authorize.net gateway. HMAC-SHA512 Compatible version.
-   Version: 6.2
+   Version: 6.2.3
    Plugin URI: http://www.indatos.com?source=woocomautho
    Author: Eshan Varma 
    Author URI: https://twitter.com/justishan
    License: Under GPL2
    WC requires at least: 3.0.0
-   WC tested up to: 4.9.0
+   WC tested up to: 4.9.2
 */
 
 add_action('plugins_loaded', 'woocommerce_tech_autho_init', 0);

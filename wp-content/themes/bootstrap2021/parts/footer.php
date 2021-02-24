@@ -44,7 +44,11 @@
 
 <script>
     AOS.init({
-       once: true, 
+       once: true,
+       disable: function() {
+    var maxWidth = 800;
+    return window.innerWidth < maxWidth;
+  }
     });
   </script>
 

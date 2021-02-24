@@ -154,18 +154,18 @@ and delete the corresponding segment of bst.js
 .close .icon-bar.top-bar {
   transform: rotate(45deg);
   transform-origin: 3% 10%;
-  background-color:#000;
+  background-color:#fff;
 }
 .navbar .icon-bar.middle-bar,
 .close .icon-bar.middle-bar {
   opacity: 0;
-  background-color:#000;
+  background-color:#fff;
 }
 .navbar .icon-bar.bottom-bar,
 .close .icon-bar.bottom-bar {
   transform: rotate(-45deg);
   transform-origin: -1% 90%;
-  background-color:#000;
+  background-color:#fff;
 }
 .navbar-toggler.collapsed .top-bar {
   transform: rotate(0);

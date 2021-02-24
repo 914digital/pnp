@@ -107,7 +107,7 @@ nav.navbar a {
 }
 
 .menu-right { 
-	width: 40%;
+	width: 35%;
     display: flex;
     background-color: #3d518b;
     position: absolute;
@@ -145,6 +145,43 @@ nav.navbar a {
 	top:-8px;
 }
 
+@media(max-width:1140px) {
+	.menu-right .top-num {
+		display:none;
+	}
+}
+
+@media(max-width:992px) {
+	nav.navbar {
+		padding:15px;
+	}
+
+	.navbar-collapse.ml-5 {
+		margin-left:0!important;
+	}
+
+	.navbar-nav {
+		margin-top:20px;
+	}
+
+	.navbar-nav .nav-link {
+		text-align: center;
+		margin: 10px 0;
+	}
+
+	.menu-right {
+		display:none;
+	}
+}
+
+.menu-mobile {
+	text-align:center;
+}
+
+.menu-mobile .nav-link::after {
+	display:none;
+}
+
 .main-banner {
 	height:600px;
 	background-size:cover;
@@ -169,6 +206,28 @@ nav.navbar a {
 
 .main-banner-text h1 span {
 	color:#F8BD38;
+}
+
+@media(max-width:769px) {
+	.main-banner {
+		height: 600px;
+		background-size: inherit;
+		width: 100%;
+		position: relative;
+		background-attachment: inherit;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	.main-banner-text h1 {
+		font-size:2.5em;
+	}
+}
+
+@media(max-width:500px) {
+	.main-banner-text h1 {
+		font-size:1.5em;
+	}
 }
 
 .mb-search {
@@ -385,6 +444,12 @@ nav.navbar a {
 	margin-bottom:30px;
 }
 
+@media(max-width:768px) {
+	.page-banner h1 {
+		font-size:2rem;
+	}
+}
+
 
 /* --- Forms --- */
 
@@ -414,12 +479,27 @@ footer .terms a {
 	color:#fff;
 }
 
-
 footer .credit .site-by {
 	font-size: 10px;
     position: relative;
 	top: 2px;
 	margin-left:10px;
+}
+
+@media(max-width:769px) {
+	footer .credit {
+		margin-top:10px;
+		float:left;
+	}
+
+	footer .credit .site-by {
+		margin-left:0;
+	}
+
+	footer .terms {
+		text-align:left;
+		margin-top:10px;
+	}
 }
 
 .scrollup {
@@ -439,3 +519,28 @@ footer .credit .site-by {
 	background-position: center;
 	padding: 20px;
   }
+
+  /* --- WooCommerce ---*/
+
+  .woocommerce #respond input#submit.alt, 
+  .woocommerce a.button.alt, 
+  .woocommerce button.button.alt, 
+  .woocommerce input.button.alt {
+    background-color: #3a92db;
+    color: #fff;
+	-webkit-font-smoothing: antialiased;
+	transition:all .3s ease;
+}
+
+.woocommerce #respond input#submit.alt:hover, 
+.woocommerce a.button.alt:hover, 
+.woocommerce button.button.alt:hover, 
+.woocommerce input.button.alt:hover {
+    background-color: #3a92db;
+	color: #fff;
+	opacity:0.7;
+}
+
+.woocommerce-input-wrapper {
+	width:100%;
+}

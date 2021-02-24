@@ -1,0 +1,75 @@
+2021-02-09T18:38:31+00:00 CRITICAL Uncaught Error: Call to undefined function esc_html_() in /www/wp-content/themes/bootstrap2021/local-phone-number-result.php:36
+Stack trace:
+#0 /wordpress/wp-includes/template.php(732): require()
+#1 /wordpress/wp-includes/template.php(676): load_template('/www/wp-content...', false, Array)
+#2 /wordpress/wp-includes/general-template.php(204): locate_template(Array, true, false, Array)
+#3 /www/wp-content/plugins/pt-wc-ringboost/pt-wc-ringboost.php(31): get_template_part('local-phone-num...')
+#4 /wordpress/wp-includes/class-wp-hook.php(287): pt_wc_rb_process_post('')
+#5 /wordpress/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(484): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(560): do_action('init')
+#8 /www/wp-config.php(110): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-config.php(5): require('/www/wp-config....')
+#10 /wordpress/wp-load.php(37): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-blog-header.php(13): require_once( in /www/wp-content/themes/bootstrap2021/local-phone-number-result.php on line 36
+
+2021-02-09T23:19:32+00:00 CRITICAL Uncaught Error: Call to undefined function esc_html_() in /www/wp-content/themes/bootstrap2021/local-phone-number-result.php:36
+Stack trace:
+#0 /wordpress/wp-includes/template.php(732): require()
+#1 /wordpress/wp-includes/template.php(676): load_template('/www/wp-content...', false, Array)
+#2 /wordpress/wp-includes/general-template.php(204): locate_template(Array, true, false, Array)
+#3 /www/wp-content/plugins/pt-wc-ringboost/pt-wc-ringboost.php(31): get_template_part('local-phone-num...')
+#4 /wordpress/wp-includes/class-wp-hook.php(287): pt_wc_rb_process_post('')
+#5 /wordpress/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(484): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(560): do_action('init')
+#8 /www/wp-config.php(110): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-config.php(5): require('/www/wp-config....')
+#10 /wordpress/wp-load.php(37): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-blog-header.php(13): require_once( in /www/wp-content/themes/bootstrap2021/local-phone-number-result.php on line 36
+
+2021-02-09T23:19:46+00:00 CRITICAL Uncaught Error: Call to undefined function esc_html_() in /www/wp-content/themes/bootstrap2021/local-phone-number-result.php:36
+Stack trace:
+#0 /wordpress/wp-includes/template.php(732): require()
+#1 /wordpress/wp-includes/template.php(676): load_template('/www/wp-content...', false, Array)
+#2 /wordpress/wp-includes/general-template.php(204): locate_template(Array, true, false, Array)
+#3 /www/wp-content/plugins/pt-wc-ringboost/pt-wc-ringboost.php(31): get_template_part('local-phone-num...')
+#4 /wordpress/wp-includes/class-wp-hook.php(287): pt_wc_rb_process_post('')
+#5 /wordpress/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(484): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(560): do_action('init')
+#8 /www/wp-config.php(110): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-config.php(5): require('/www/wp-config....')
+#10 /wordpress/wp-load.php(37): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-blog-header.php(13): require_once( in /www/wp-content/themes/bootstrap2021/local-phone-number-result.php on line 36
+
+2021-02-09T23:19:55+00:00 CRITICAL Uncaught Error: Call to undefined function esc_html_() in /www/wp-content/themes/bootstrap2021/local-phone-number-result.php:36
+Stack trace:
+#0 /wordpress/wp-includes/template.php(732): require()
+#1 /wordpress/wp-includes/template.php(676): load_template('/www/wp-content...', false, Array)
+#2 /wordpress/wp-includes/general-template.php(204): locate_template(Array, true, false, Array)
+#3 /www/wp-content/plugins/pt-wc-ringboost/pt-wc-ringboost.php(31): get_template_part('local-phone-num...')
+#4 /wordpress/wp-includes/class-wp-hook.php(287): pt_wc_rb_process_post('')
+#5 /wordpress/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(484): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(560): do_action('init')
+#8 /www/wp-config.php(110): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-config.php(5): require('/www/wp-config....')
+#10 /wordpress/wp-load.php(37): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-blog-header.php(13): require_once( in /www/wp-content/themes/bootstrap2021/local-phone-number-result.php on line 36
+
+2021-02-09T23:20:07+00:00 CRITICAL Uncaught Error: Call to undefined function esc_html_() in /www/wp-content/themes/bootstrap2021/local-phone-number-result.php:36
+Stack trace:
+#0 /wordpress/wp-includes/template.php(732): require()
+#1 /wordpress/wp-includes/template.php(676): load_template('/www/wp-content...', false, Array)
+#2 /wordpress/wp-includes/general-template.php(204): locate_template(Array, true, false, Array)
+#3 /www/wp-content/plugins/pt-wc-ringboost/pt-wc-ringboost.php(31): get_template_part('local-phone-num...')
+#4 /wordpress/wp-includes/class-wp-hook.php(287): pt_wc_rb_process_post('')
+#5 /wordpress/wp-includes/class-wp-hook.php(311): WP_Hook->apply_filters(NULL, Array)
+#6 /wordpress/wp-includes/plugin.php(484): WP_Hook->do_action(Array)
+#7 /wordpress/wp-settings.php(560): do_action('init')
+#8 /www/wp-config.php(110): require_once('/wordpress/wp-s...')
+#9 /wordpress/wp-config.php(5): require('/www/wp-config....')
+#10 /wordpress/wp-load.php(37): require_once('/wordpress/wp-c...')
+#11 /wordpress/wp-blog-header.php(13): require_once( in /www/wp-content/themes/bootstrap2021/local-phone-number-result.php on line 36
+
